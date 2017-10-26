@@ -1,0 +1,23 @@
+//
+// load hubs (blue)
+//
+load CSV with headers from 'file:///Blue_DC_List.csv' as row create (:DC {ORG_ID: row.ORG_ID, Name:row.ORG_NAME, Address_1: row.ADDRESS_1, Address_2:row.ADDRESS_2, State: row.STATE, Postcode: row.PCODE, latitude :toFloat(row.LATITUDE), longitude: toFloat(row.LONGITUDE)});
+
+//
+// load processing facilities (blue)
+//
+load CSV with headers from 'file:///Blue_PF_List.csv' as row create (:PC {ORG_ID: row.ORG_ID, Name:row.ORG_NAME, Address_1: row.ADDRESS_1, Address_2:row.ADDRESS_2, State: row.STATE, Postcode: row.PCODE, latitude :toFloat(row.LATITUDE), longitude: toFloat(row.LONGITUDE)});
+
+//
+// add spacetime nodes to each facility (DC, PC, Outlet)
+//
+match (p1:DC) 
+create (st0:SpaceTime {Time:0}) 
+create (st72:SpaceTime {Time:72}) 
+create (st204:SpaceTime {Time:204}) 
+create (st288:SpaceTime {Time:288}) 
+create (p1)-[r1:Temporal]->(st0) 
+create (st0)-[r2:Temporal]->(st72) 
+create (st72)-[r3:Temporal]->(st204) 
+create (st204)-[r4:Temporal]->(st288) 
+create (st288)-[r5:Temporal]->(p1)
