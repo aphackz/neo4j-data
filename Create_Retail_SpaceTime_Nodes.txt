@@ -1,0 +1,2 @@
+match (p1:Outlet) create (st0:SpaceTime {Time:0}) create (st72:SpaceTime {Time:72}) create (st204:SpaceTime {Time:204}) create (st288:SpaceTime {Time:288}) create (p1)-[r1:Temporal]->(st0) create (st0)-[r2:Temporal]->(st72) create (st72)-[r3:Temporal]->(st204) create (st204)-[r4:Temporal]->(st288) create (st288)-[r5:Temporal]->(p1) 
+
