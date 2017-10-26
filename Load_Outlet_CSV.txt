@@ -1,2 +1,0 @@
-LOAD CSV WITH HEADERS FROM 'file:///Sample_Outlets.csv' as row
-create (:Outlet {Name:row.FACILITY_NAME ,ID:row.OU_ID,TYPE:row.TYPE,State:row.STATE,Postcode:row.PCODE,Addesss:row.Address_2,Parent:row.SUPERIOR_ORG_ID, Latitude:row.LATITUDE, Longitude:row.LONGITUDE})
