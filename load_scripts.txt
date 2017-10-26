@@ -14,6 +14,12 @@ load CSV with headers from 'https://raw.githubusercontent.com/aphackz/network-ne
 load CSV with headers from 'https://raw.githubusercontent.com/aphackz/network-neo4j-data/develop/Sample_Outlets.csv' as row create (:Outlet {Name:row.FACILITY_NAME, ID:row.OU_ID,TYPE:row.TYPE,State:row.STATE,Postcode:row.PCODE,Addesss:row.Address_2,Parent:row.SUPERIOR_ORG_ID, Latitude:row.LATITUDE, Longitude:row.LONGITUDE})
 
 //
+// load residential
+//
+load CSV with headers from 'https://raw.githubusercontent.com/aphackz/network-neo4j-data/develop/Blue_RA_List.csv' as row create (:Residential {ID:row.L_ID,TYPE:row.TYPE,State:row.STATE,Postcode:row.PCODE,Address_1: row.ADDRESS_1, Addesss_2:row.Address_2, Latitude:row.LATITUDE, Longitude:row.LONGITUDE})
+
+
+//
 // add spacetime nodes to each facility (DC, PC, Outlet)
 //
 match (p1:DC) 
@@ -54,4 +60,21 @@ create (st0)-[r2:Temporal]->(st72)
 create (st72)-[r3:Temporal]->(st204) 
 create (st204)-[r4:Temporal]->(st288) 
 create (st288)-[r5:Temporal]->(p1)
+
+//
+// add spacetime nodes to each facility (DC, PC, Residential)
+//
+match (p1:Residential) 
+create (st0:SpaceTime {Time:0}) 
+create (st72:SpaceTime {Time:72}) 
+create (st204:SpaceTime {Time:204}) 
+create (st288:SpaceTime {Time:288}) 
+create (p1)-[r1:Temporal]->(st0) 
+create (st0)-[r2:Temporal]->(st72) 
+create (st72)-[r3:Temporal]->(st204) 
+create (st204)-[r4:Temporal]->(st288) 
+create (st288)-[r5:Temporal]->(p1)
+create (st204)-[r1:Temporal]->(p1) 
+create (st72)-[r2:Temporal]->(p1) 
+create (st0)-[r3:Temporal]->(p1) 
 
