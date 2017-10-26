@@ -20,7 +20,7 @@ load CSV with headers from 'https://raw.githubusercontent.com/aphackz/network-ne
 
 
 //
-// add spacetime nodes to each facility (DC, PC, Outlet)
+// add spacetime nodes to each DC node
 //
 match (p1:DC) 
 create (st0:SpaceTime {Time:0}) 
@@ -34,7 +34,7 @@ create (st204)-[r4:Temporal]->(st288)
 create (st288)-[r5:Temporal]->(p1)
 
 //
-// add spacetime nodes to each facility (DC, PC, Outlet)
+// add spacetime nodes to each PC node
 //
 match (p1:PC) 
 create (st0:SpaceTime {Time:0}) 
@@ -48,7 +48,7 @@ create (st204)-[r4:Temporal]->(st288)
 create (st288)-[r5:Temporal]->(p1)
 
 //
-// add spacetime nodes to each facility (DC, PC, Outlet)
+// add spacetime nodes to each Outlet node
 //
 match (p1:Outlet) 
 create (st0:SpaceTime {Time:0}) 
@@ -62,7 +62,7 @@ create (st204)-[r4:Temporal]->(st288)
 create (st288)-[r5:Temporal]->(p1)
 
 //
-// add spacetime nodes to each facility (DC, PC, Residential)
+// add spacetime nodes to each Residential node
 //
 match (p1:Residential) 
 create (st0:SpaceTime {Time:0}) 
