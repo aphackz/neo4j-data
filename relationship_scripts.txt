@@ -1,54 +1,54 @@
 //===== DC to PC CONSOLIDATION RELATIONSHIP =====//
 
 // Create relationships from Spacetime 0 of ALL VICTORIAN DC's to Spacetime 72 of ONE VICTORIAN PC
-MATCH (dc:DC{State:"VIC"})-[*..5]->(st0:SpaceTime) where st0.Time = 0
-MATCH (pc:PC{State:"VIC"})-[*..5]->(st1:SpaceTime) where st1.Time = 72
+MATCH (dc:DC{State:"VIC"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 0
+MATCH (pc:PC{State:"VIC"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 72
 CREATE (st0)-[r1:Consolidate]->(st1)
 
 // Create relationships from Spacetime 0 of ALL NSW DC's to Spacetime 72 of ONE NSW PC
-MATCH (dc:DC{State:"NSW"})-[*..5]->(st0:SpaceTime) where st0.Time = 0
-MATCH (pc:PC{State:"NSW"})-[*..5]->(st1:SpaceTime) where st1.Time = 72
+MATCH (dc:DC{State:"NSW"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 0
+MATCH (pc:PC{State:"NSW"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 72
 CREATE (st0)-[r1:Consolidate]->(st1)
 
 // Create relationships from Spacetime 0 of ALL QLD DC'S to Spacetime 72 of ONE QLD PC
-MATCH (dc:DC{State:"QLD"})-[*..5]->(st0:SpaceTime) where st0.Time = 0
-MATCH (pc:PC{State:"QLD"})-[*..5]->(st1:SpaceTime) where st1.Time = 72
+MATCH (dc:DC{State:"QLD"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 0
+MATCH (pc:PC{State:"QLD"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 72
 CREATE (st0)-[r1:Consolidate]->(st1)
 
 
 //===== PC to DC DISTRIBUTION RELATIONSHIP =====//
 
 // Create relationships from Spacetime 204 of ONE VICTORIAN PC to Spacetime 288 of ONE VICTORIAN DC
-MATCH (pc:PC{State:"VIC"})-[*..5]->(st0:SpaceTime) where st0.Time = 204
-MATCH (dc:DC{ORG_ID:"357659", State:"VIC"})-[*..5]->(st1:SpaceTime) where st1.Time = 288
+MATCH (pc:PC{State:"VIC"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 204
+MATCH (dc:DC{ORG_ID:"357659", State:"VIC"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 288
 CREATE (st0)-[r1:Distribution]->(st1)
 
 // Create relationships from Spacetime 204 of ONE NSW OUTLETS to Spacetime 288 of ONE NSW DC
-MATCH (pc:PC{State:"NSW"})-[*..5]->(st0:SpaceTime) where st0.Time = 204
-MATCH (dc:DC{ORG_ID:"222260", State:"NSW"})-[*..5]->(st1:SpaceTime) where st1.Time = 288
+MATCH (pc:PC{State:"NSW"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 204
+MATCH (dc:DC{ORG_ID:"222260", State:"NSW"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 288
 CREATE (st0)-[r1:Distribution]->(st1)
 
 // Create relationships from Spacetime 204 of ONE QLD OUTLETS to Spacetime 288 of ONE QLD DC
-MATCH (pc:PC{State:"QLD"})-[*..5]->(st0:SpaceTime) where st0.Time = 204
-MATCH (dc:DC{ORG_ID:"432743", State:"QLD"})-[*..5]->(st1:SpaceTime) where st1.Time = 288
+MATCH (pc:PC{State:"QLD"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 204
+MATCH (dc:DC{ORG_ID:"432743", State:"QLD"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 288
 CREATE (st0)-[r1:Distribution]->(st1)
 
 
 //==== OUTLET to DC COLLECTION RELATIONSHIP =====//
 
 // Create relationships from Spacetime 204 of ALL VICTORIAN OUTLETS to Spacetime 288 of ONE VICTORIAN DC
-MATCH (o:Outlet{State:"VIC"})-[*..5]->(st0:SpaceTime) where st0.Time = 204
-MATCH (dc:DC{ORG_ID:"357659", State:"VIC"})-[*..5]->(st1:SpaceTime) where st1.Time = 288
+MATCH (o:Outlet{State:"VIC"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 204
+MATCH (dc:DC{ORG_ID:"357659", State:"VIC"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 288
 CREATE (st0)-[r1:Collect]->(st1)
 
 // Create relationships from Spacetime 204 of ALL NSW OUTLETS to Spacetime 288 of ONE NSW DC
-MATCH (o:Outlet{State:"NSW"})-[*..5]->(st0:SpaceTime) where st0.Time = 204
-MATCH (dc:DC{ORG_ID:"222260", State:"NSW"})-[*..5]->(st1:SpaceTime) where st1.Time = 288
+MATCH (o:Outlet{State:"NSW"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 204
+MATCH (dc:DC{ORG_ID:"222260", State:"NSW"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 288
 CREATE (st0)-[r1:Collect]->(st1)
 
 // Create relationships from Spacetime 204 of ALL QLD OUTLETS to Spacetime 288 of ONE QLD DC
-MATCH (o:Outlet{State:"QLD"})-[*..5]->(st0:SpaceTime) where st0.Time = 204
-MATCH (dc:DC{ORG_ID:"432743", State:"QLD"})-[*..5]->(st1:SpaceTime) where st1.Time = 288
+MATCH (o:Outlet{State:"QLD"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 204
+MATCH (dc:DC{ORG_ID:"432743", State:"QLD"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 288
 CREATE (st0)-[r1:Collect]->(st1)
 
 
@@ -60,5 +60,19 @@ MATCH (pc2:PC)-[]-(st1:SpaceTime) where st1.Time = 0 and not pc1.ORG_ID = pc2.OR
 CREATE (st0)-[:Linehaul]->(st1)
 
 
-//===== RESIDENTIAL ROUTE RELATIONSHIP =====//
+//===== DC to Residential RELATIONSHIP =====//
 
+// Create relationships from Spacetime 72 of nominated VIC DC to Spacetime 204 of all VIC Residentials
+MATCH (dc:DC{State:"VIC", ORG_ID:"357659"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 72
+MATCH (res:Residential{State:"VIC"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 204
+CREATE (st0)-[r1:Route]->(st1)
+
+// Create relationships from Spacetime 72 of nominated NSW DC to Spacetime 204 of all NSW Residentials
+MATCH (dc:DC{State:"NSW", ORG_ID:"222260"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 72
+MATCH (res:Residential{State:"NSW"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 204
+CREATE (st0)-[r1:Route]->(st1)
+
+// Create relationships from Spacetime 72 of nominated NSW DC to Spacetime 204 of all NSW Residentials
+MATCH (dc:DC{State:"QLD", ORG_ID:"432743"})-[:Temporal*]->(st0:SpaceTime) where st0.Time = 72
+MATCH (res:Residential{State:"QLD"})-[:Temporal*]->(st1:SpaceTime) where st1.Time = 204
+CREATE (st0)-[r1:Route]->(st1)
