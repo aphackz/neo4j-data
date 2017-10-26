@@ -58,3 +58,7 @@ CREATE (st0)-[r1:Collect]->(st1)
 MATCH (pc1:PC)-[]-(st0:SpaceTime) where st0.Time = 288
 MATCH (pc2:PC)-[]-(st1:SpaceTime) where st1.Time = 0 and not pc1.ORG_ID = pc2.ORG_ID
 CREATE (st0)-[:Linehaul]->(st1)
+
+
+//===== RESIDENTIAL ROUTE RELATIONSHIP =====//
+
