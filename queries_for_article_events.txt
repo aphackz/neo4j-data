@@ -31,5 +31,5 @@ SET r.Status = "Complete"
 //===== Query for residential =====//
 MATCH (a:Article)
 MATCH (r:Residential{ID:"256676"})
-MATCH (a)-[r:Via]->(r)
-SET r.Status = "Complete"
+MATCH (a)-[v:Via]->(r)
+SET v.Status = "Complete"

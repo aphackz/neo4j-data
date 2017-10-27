@@ -1,7 +1,15 @@
 //
-// Shortest path from Outlet to DC based on ID's
+// Shortest path from 111 Bourke St Outlet to High St VIC
 //
-MATCH (P1:Outlet {ID:"249359"})
-MATCH (P3:DC {ORG_ID:"202104"})
-MATCH path = shortestPath( (P1)-[*..5]->(P3) )
+MATCH (P1:Outlet {ID:"343214"})
+MATCH (P3:Residential {ID:"345656"})
+MATCH path = shortestPath( (P1)-[*..20]->(P3) )
+return P1, P3, path
+
+//
+// Shortest path from 111 Bourke St Outlet to Plucks Rd QLD
+//
+MATCH (P1:Outlet {ID:"343214"})
+MATCH (P3:Residential {ID:"421231"})
+MATCH path = shortestPath( (P1)-[*..20]->(P3) )
 return P1, P3, path
