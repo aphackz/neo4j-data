@@ -1,0 +1,70 @@
+Type: POST
+URL: http://localhost:7474/db/data/cypher
+
+Basic Auth
+Username: neo4j
+Password: Picard
+
+Body
+{
+  "query" : "match (a:Article)-[v:Via]->(loc) return v.Status, loc.Name, labels(loc)",
+  "params" : { }
+}
+
+
+
+
+
+
+//===== EXAMPLE RESPONSE =====//
+{
+    "columns": [
+        "v.Status",
+        "loc.Name",
+        "labels(loc)"
+    ],
+    "data": [
+        [
+            "Complete",
+            "STARTRACK WAGGA WAGGA",
+            [
+                "DC"
+            ]
+        ],
+        [
+            "Complete",
+            null,
+            [
+                "Residential"
+            ]
+        ],
+        [
+            "Complete",
+            "BENTLEIGH EAST POST SHOP",
+            [
+                "Outlet"
+            ]
+        ],
+        [
+            "Complete",
+            "STARTRACK MELBOURNE",
+            [
+                "DC"
+            ]
+        ],
+        [
+            "Complete",
+            "STARTRACK MELBOURNE PROCESS CENTRE",
+            [
+                "PC"
+            ]
+        ],
+        [
+            "Complete",
+            "STARTRACK SYD PROCESS CENTRE",
+            [
+                "PC"
+            ]
+        ]
+    ]
+}
