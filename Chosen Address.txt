@@ -1,25 +1,25 @@
-333555,JOHN SMITH,8 BRENTWOOD STREET,BENTLEIGH,3204,VIC
+//333555,JOHN SMITH,8 BRENTWOOD STREET,BENTLEIGH,3204,VIC
+//TO
+//321808,BENTLEIGH EAST POST SHOP,RP,,714 CENTRE ROAD,BENTLEIGH EAST  VIC,3165,VIC,03 9579 7510,03 9579 7810,355232,CENTRAL AREA MANAGER & STAFF
+//TO
+//256676,JACKSON BIRD,12 ANZAC STREET,CHULLORA,2190,NSW
 
-TO
+//=====Create Article plus its relationships to it's stops=====//
+MATCH (start:Outlet{ID:"321808"})
+MATCH (stop1:DC{ORG_ID:"357659"})
+MATCH (stop2:PC{ORG_ID:"357675"})
+MATCH (stop3:PC{ORG_ID:"224426"})
+MATCH (stop4:DC{ORG_ID:"222260"})
+MATCH (destination:Residential{ID:"256676"})
 
-321808,BENTLEIGH EAST POST SHOP,RP,,714 CENTRE ROAD,BENTLEIGH EAST  VIC,3165,VIC,03 9579 7510,03 9579 7810,355232,CENTRAL AREA MANAGER & STAFF
+CREATE (a1:Article{ID:"1"})
+CREATE (a1)-[:Via]->(start)
+CREATE (a1)-[:Via]->(stop1)
+CREATE (a1)-[:Via]->(stop2)
+CREATE (a1)-[:Via]->(stop3)
+CREATE (a1)-[:Via]->(stop4)
+CREATE (a1)-[:Via]->(destination)
 
-TO
-
-256676,JACKSON BIRD,12 ANZAC STREET,CHULLORA,2190,NSW
-
-Article plus it's relationships to the 
-
-MATCH (dest1:Outlet{OU_ID:"321808"})
-MATCH (dest2:DC{ORG_ID:""})
-MATCH (dest3:PC{ORG_ID:""})
-MATCH (dest4:PC{ORG_ID:""})
-MATCH (dest5:DC{ORG_ID:""})
-MATCH (dest6:Residential{ID:"256676"})
-
-CREATE (a1:Article)-[r1:Via{Status:"In Progress",}]->(d)
-
-MATCH (OUT:OUtlet {OU_ID:"321808"})
-MATCH (RA2:Residential {ID:"256676"})
-MATCH path = shortestPath( (RA1)-[*..5]->(RA2) )
-return RA1, RA2, path
+//=====Set the via relationship properties=====//
+MATCH (a1)-[r:Via]->()
+SET r.Status = "Pending"
