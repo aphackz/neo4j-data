@@ -1,0 +1,35 @@
+//===== Query to initialize =====//
+MATCH (a:Article)
+MATCH (o:Outlet{ID:"321808"})
+MATCH (a)-[r:Via]->(o)
+SET r.Status = "Complete"
+
+//===== Query for stop1 =====//
+MATCH (a:Article)
+MATCH (dc1:DC{ORG_ID:"357659"})
+MATCH (a)-[r:Via]->(dc1)
+SET r.Status = "Complete"
+
+//===== Query for stop2 =====//
+MATCH (a:Article)
+MATCH (pc1:PC{ORG_ID:"357675"})
+MATCH (a)-[r:Via]->(pc1)
+SET r.Status = "Complete"
+
+//===== Query for stop3 =====//
+MATCH (a:Article)
+MATCH (pc2:PC{ORG_ID:"224426"})
+MATCH (a)-[r:Via]->(pc2)
+SET r.Status = "Complete"
+
+//===== Query for stop4 =====//
+MATCH (a:Article)
+MATCH (dc2:DC{ORG_ID:"222260"})
+MATCH (a)-[r:Via]->(dc2)
+SET r.Status = "Complete"
+
+//===== Query for residential =====//
+MATCH (a:Article)
+MATCH (r:Residential{ID:"256676"})
+MATCH (a)-[r:Via]->(r)
+SET r.Status = "Complete"
