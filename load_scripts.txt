@@ -1,23 +1,30 @@
 //
 // load distribution centres (blue)
 //
-load CSV with headers from 'https://raw.githubusercontent.com/aphackz/network-neo4j-data/develop/Blue_DC_List.csv' as row create (:DC {ORG_ID: row.ORG_ID, Name:row.ORG_NAME, Address_1: row.ADDRESS_1, Address_2:row.ADDRESS_2, State: row.STATE, Postcode: row.PCODE, latitude :toFloat(row.LATITUDE), longitude: toFloat(row.LONGITUDE)});
+load CSV with headers from 'https://raw.githubusercontent.com/aphackz/network-neo4j-data/develop/Blue_DC_List.csv' as row create (:DC {ORG_ID: row.ORG_ID, Name:row.ORG_NAME, Address_1: row.ADDRESS_1, Address_2:row.ADDRESS_2, State: row.STATE, Postcode: row.PCODE, latitude :toFloat(row.LATITUDE), longitude: toFloat(row.LONGITUDE)})
+
+WITH count(*) as dummy
 
 //
 // load processing centres (blue)
 //
-load CSV with headers from 'https://raw.githubusercontent.com/aphackz/network-neo4j-data/develop/Blue_PC_List.csv' as row create (:PC {ORG_ID: row.ORG_ID, Name:row.ORG_NAME, Address_1: row.ADDRESS_1, Address_2:row.ADDRESS_2, State: row.STATE, Postcode: row.PCODE, latitude :toFloat(row.LATITUDE), longitude: toFloat(row.LONGITUDE)});
+load CSV with headers from 'https://raw.githubusercontent.com/aphackz/network-neo4j-data/develop/Blue_PC_List.csv' as row create (:PC {ORG_ID: row.ORG_ID, Name:row.ORG_NAME, Address_1: row.ADDRESS_1, Address_2:row.ADDRESS_2, State: row.STATE, Postcode: row.PCODE, latitude :toFloat(row.LATITUDE), longitude: toFloat(row.LONGITUDE)})
+
+WITH count(*) as dummy
 
 //
 // load outlets
 //
 load CSV with headers from 'https://raw.githubusercontent.com/aphackz/network-neo4j-data/develop/Sample_Outlets.csv' as row create (:Outlet {Name:row.FACILITY_NAME, ID:row.OU_ID,TYPE:row.TYPE,State:row.STATE,Postcode:row.PCODE,Addesss:row.Address_2,Parent:row.SUPERIOR_ORG_ID, Latitude:row.LATITUDE, Longitude:row.LONGITUDE})
 
+WITH count(*) as dummy
+
 //
 // load residential
 //
 load CSV with headers from 'https://raw.githubusercontent.com/aphackz/network-neo4j-data/develop/Blue_RA_List.csv' as row create (:Residential {ID:row.L_ID,TYPE:row.TYPE,State:row.STATE,Postcode:row.PCODE,Address_1: row.ADDRESS_1, Addesss_2:row.Address_2, Latitude:row.LATITUDE, Longitude:row.LONGITUDE})
 
+WITH count(*) as dummy
 
 //
 // add spacetime nodes to each DC node
@@ -33,6 +40,8 @@ create (st72)-[r3:Temporal]->(st204)
 create (st204)-[r4:Temporal]->(st288) 
 create (st288)-[r5:Temporal]->(p1)
 
+WITH count(*) as dummy
+
 //
 // add spacetime nodes to each PC node
 //
@@ -47,6 +56,8 @@ create (st72)-[r3:Temporal]->(st204)
 create (st204)-[r4:Temporal]->(st288) 
 create (st288)-[r5:Temporal]->(p1)
 
+WITH count(*) as dummy
+
 //
 // add spacetime nodes to each Outlet node
 //
@@ -60,6 +71,8 @@ create (st0)-[r2:Temporal]->(st72)
 create (st72)-[r3:Temporal]->(st204) 
 create (st204)-[r4:Temporal]->(st288) 
 create (st288)-[r5:Temporal]->(p1)
+
+WITH count(*) as dummy
 
 //
 // add spacetime nodes to each Residential node
@@ -76,4 +89,4 @@ create (st204)-[r4:Temporal]->(st288)
 create (st288)-[r5:Temporal]->(p1)
 create (st204)-[r6:Temporal]->(p1) 
 create (st72)-[r7:Temporal]->(p1) 
-create (st0)-[r8:Temporal]->(p1) 
+create (st0)-[r8:Temporal]->(p1)
